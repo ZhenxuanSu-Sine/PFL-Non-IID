@@ -76,11 +76,11 @@ class Client(object):
         y_predict = torch.argmax(y_prob, dim=1)
         x = x.to(torch.device('cpu'))
         for i in range(b):
-            image = x[i]
+            image = x[i]  # [-1, 1]
             predict = y_predict[i]
             prob = y_prob[i, predict]
             label = y_true[i]
-            print((image, predict, prob, label))
+            print((predict, prob, label))
 
 
     def test_metrics(self):
