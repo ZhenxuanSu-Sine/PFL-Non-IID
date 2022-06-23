@@ -75,7 +75,7 @@ class Client(object):
         b, c, w, h = x.shape
         y_predict = torch.argmax(y_prob, dim=1)
         x = x.to(torch.device('cpu'))
-        for data_index in range(b):
+        for i in range(b):
             image = x[i]
             predict = y_predict[i]
             prob = y_prob[i, predict]
