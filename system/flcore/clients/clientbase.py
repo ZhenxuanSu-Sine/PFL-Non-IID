@@ -71,6 +71,18 @@ class Client(object):
         for param, new_param in zip(model.parameters(), new_params):
             param.data = new_param.data.clone()
 
+    def save_demo(self, x, y_prob, y_true):
+        b, c, w, h = x.shape
+        y_predict = torch.argmax(y_prob, dim=1)
+        x = x.to(torch.device('cpu'))
+        for data_index in range(b):
+            image = x[i]
+            predict = y_predict[i]
+            prob = y_prob[i, predict]
+            label = y_true[i]
+            print((image, predict, prob, label))
+
+
     def test_metrics(self):
         testloaderfull = self.load_test_data()
         # self.model = self.load_model('model')
@@ -90,6 +102,8 @@ class Client(object):
                     x = x.to(self.device)
                 y = y.to(self.device)
                 output = self.model(x)
+
+                self.save_demo(x, output, y)
 
                 test_acc += (torch.sum(torch.argmax(output, dim=1) == y)).item()
                 test_num += y.shape[0]
