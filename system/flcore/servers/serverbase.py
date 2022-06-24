@@ -162,6 +162,7 @@ class Server(object):
         num_samples = []
         tot_correct = []
         tot_auc = []
+        print('new round')
         for c in self.selected_clients:
             ct, ns, auc = c.test_metrics()
             tot_correct.append(ct*1.0)

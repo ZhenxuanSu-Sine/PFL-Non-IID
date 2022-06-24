@@ -103,8 +103,8 @@ class Client(object):
                 y = y.to(self.device)
                 output = self.model(x)
 
-                print('------------test------------')
-                self.save_demo(x, output, y)
+                # print('------------test------------')
+                # self.save_demo(x, output, y)
 
                 test_acc += (torch.sum(torch.argmax(output, dim=1) == y)).item()
                 test_num += y.shape[0]
@@ -119,7 +119,9 @@ class Client(object):
         y_true = np.concatenate(y_true, axis=0)
 
         auc = metrics.roc_auc_score(y_true, y_prob, average='micro')
-        
+
+        print('prec: %.4f' % (test_acc / test_num))
+
         return test_acc, test_num, auc
 
     def train_metrics(self):
@@ -137,8 +139,8 @@ class Client(object):
                 x = x.to(self.device)
             y = y.to(self.device)
             output = self.model(x)
-            print('------------train------------')
-            self.save_demo(x, output, y)
+            # print('------------train------------')
+            # self.save_demo(x, output, y)
             train_num += y.shape[0]
             loss += self.loss(output, y).item() * y.shape[0]
 
