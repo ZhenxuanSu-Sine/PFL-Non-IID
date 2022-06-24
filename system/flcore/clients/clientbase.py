@@ -78,7 +78,7 @@ class Client(object):
         for i in range(b):
             image = x[i]  # [-1, 1]
             predict = y_predict[i]
-            prob = y_prob[i, predict] / torch.sum(torch.exp(y_prob[i]))
+            prob = torch.exp(y_prob[i, predict]) / torch.sum(torch.exp(y_prob[i]))
             label = y_true[i]
             print((predict, prob, label))
 

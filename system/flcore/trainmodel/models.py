@@ -78,7 +78,11 @@ class FedAvgCNN(nn.Module):
             nn.Linear(dim, 512), 
             nn.ReLU(inplace=True)
         )
-        self.fc = nn.Linear(512, num_classes)
+        # self.fc = nn.Linear(512, num_classes)
+        self.fc = nn.Sequential(
+            nn.Linear(512, num_classes),
+            # nn.Softmax()
+        )
 
     def forward(self, x):
         out = self.conv1(x)
