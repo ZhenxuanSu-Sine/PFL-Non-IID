@@ -103,6 +103,7 @@ class Client(object):
                 y = y.to(self.device)
                 output = self.model(x)
 
+                print('------------test------------')
                 self.save_demo(x, output, y)
 
                 test_acc += (torch.sum(torch.argmax(output, dim=1) == y)).item()
@@ -136,6 +137,8 @@ class Client(object):
                 x = x.to(self.device)
             y = y.to(self.device)
             output = self.model(x)
+            print('------------train------------')
+            self.save_demo(x, output, y)
             train_num += y.shape[0]
             loss += self.loss(output, y).item() * y.shape[0]
 
