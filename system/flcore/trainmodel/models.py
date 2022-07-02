@@ -423,7 +423,7 @@ class trans(nn.Module):
         self.register_parameter(name='w', param=nn.parameter.Parameter(-init * torch.ones(num_classes, num_classes)))
 
         self.w.to(device)
-
+        print('setting at %s' % device)
         co = torch.ones(num_classes, num_classes)
         ind = np.diag_indices(co.shape[0])
         co[ind[0], ind[1]] = torch.zeros(co.shape[0])
