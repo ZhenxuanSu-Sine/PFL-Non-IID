@@ -11,7 +11,7 @@ class clientVolMin(Client):
     def __init__(self, args, id, train_samples, test_samples, **kwargs):
         super().__init__(args, id, train_samples, test_samples, **kwargs)
 
-        self.lam = args.lam
+        self.lam = args.lambda_t
         self.trans = trans(args.device, args.num_classes)
         self.loss = nn.CrossEntropyLoss()
         self.optimizer = torch.optim.SGD([{'params': self.model.parameters()},

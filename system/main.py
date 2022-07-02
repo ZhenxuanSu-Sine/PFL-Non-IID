@@ -254,7 +254,7 @@ if __name__ == "__main__":
     # Ditto / FedRep
     parser.add_argument('-pls', "--plocal_steps", type=int, default=1)
 
-    parser.add_argument('-lam', '--lam', type=float, default=1e-4)
+    parser.add_argument('-lambda_t', '--lambda_t', type=float, default=1e-4)
 
     args = parser.parse_args()
 
