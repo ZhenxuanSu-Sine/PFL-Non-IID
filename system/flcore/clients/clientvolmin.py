@@ -11,6 +11,7 @@ class clientVolMin(Client):
     def __init__(self, args, id, train_samples, test_samples, **kwargs):
         super().__init__(args, id, train_samples, test_samples, **kwargs)
 
+        self.lam = args.lam
         self.trans = trans(args.device, args.num_classes)
         self.loss = nn.CrossEntropyLoss()
         self.optimizer = torch.optim.SGD([{'params': self.model.parameters()},
@@ -47,9 +48,12 @@ class clientVolMin(Client):
                 self.optimizer.zero_grad()
                 output = self.model(x)
 
-                clean_output = self.trans(output)
+                t = self.trans(output)
 
-                loss = self.loss(clean_output, y)
+                output = torch.mm(output, t)
+
+                vol_loss = t.slogdet().logabsdet
+                loss = self.loss(output, y) + self.lam * vol_loss
                 loss.backward()
                 if self.privacy:
                     dp_step(self.optimizer, i, len(trainloader))
