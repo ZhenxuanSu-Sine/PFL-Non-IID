@@ -432,6 +432,9 @@ class trans(nn.Module):
 
     def forward(self):
         sig = torch.sigmoid(self.w)
+        print(sig.device)
+        print(self.co.device)
+        print(self.identity.device)
         T = self.identity.detach() + sig * self.co.detach()
         T = F.normalize(T, p=1, dim=1)
 
