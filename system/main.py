@@ -158,7 +158,7 @@ def run(args):
             args.model.fc = nn.Identity()
             args.model = LocalModel(args.model, args.predictor)
             server = FedROD(args, i)
-        elif args.algorithm == "FedMinVol":
+        elif args.algorithm == "FedVolMin":
             server = FedVolMin(args, i)
         else:
             raise NotImplementedError
