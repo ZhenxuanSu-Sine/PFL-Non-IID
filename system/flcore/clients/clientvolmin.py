@@ -48,7 +48,7 @@ class clientVolMin(Client):
                 self.optimizer.zero_grad()
                 output = self.model(x)
 
-                t = self.trans(output)
+                t = self.trans()
 
                 output = torch.mm(output, t)
 
