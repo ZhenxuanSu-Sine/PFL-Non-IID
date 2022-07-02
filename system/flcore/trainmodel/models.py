@@ -422,7 +422,7 @@ class trans(nn.Module):
 
         self.register_parameter(name='w', param=nn.parameter.Parameter(-init * torch.ones(num_classes, num_classes)))
 
-        self.w.to(device)
+        self.w = self.w.to(device)
 
         co = torch.ones(num_classes, num_classes)
         ind = np.diag_indices(co.shape[0])
@@ -432,9 +432,9 @@ class trans(nn.Module):
 
     def forward(self):
         sig = torch.sigmoid(self.w)
-        print(sig.device)
-        print(self.co.device)
-        print(self.identity.device)
+        # print(sig.device)
+        # print(self.co.device)
+        # print(self.identity.device)
         T = self.identity.detach() + sig * self.co.detach()
         T = F.normalize(T, p=1, dim=1)
 
