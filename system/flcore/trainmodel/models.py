@@ -415,6 +415,27 @@ class TextCNN(nn.Module):
 
         return out
 
+class trans(nn.Module):
+    def __init__(self, device, num_classes, init=2):
+        super(trans, self).__init__()
+
+        self.register_parameter(name='w', param=nn.parameter.Parameter(-init * torch.ones(num_classes, num_classes)))
+
+        self.w.to(device)
+
+        co = torch.ones(num_classes, num_classes)
+        ind = np.diag_indices(co.shape[0])
+        co[ind[0], ind[1]] = torch.zeros(co.shape[0])
+        self.co = co.to(device)
+        self.identity = torch.eye(num_classes).to(device)
+
+    def forward(self):
+        sig = torch.sigmoid(self.w)
+        T = self.identity.detach() + sig * self.co.detach()
+        T = F.normalize(T, p=1, dim=1)
+
+        return T
+
 # ====================================================================================================================
 
 

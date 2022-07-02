@@ -24,6 +24,7 @@ from flcore.servers.serverrep import FedRep
 from flcore.servers.serverphp import FedPHP
 from flcore.servers.serverbn import FedBN
 from flcore.servers.serverrod import FedROD
+from flcore.servers.servervolmin import FedVolMin
 
 from flcore.trainmodel.models import *
 
@@ -157,6 +158,8 @@ def run(args):
             args.model.fc = nn.Identity()
             args.model = LocalModel(args.model, args.predictor)
             server = FedROD(args, i)
+        elif args.algorithm == "FedMinVol":
+            server = FedVolMin(args, i)
         else:
             raise NotImplementedError
 
@@ -274,7 +277,7 @@ if __name__ == "__main__":
     print("Running times: {}".format(args.times))
     print("Dataset: {}".format(args.dataset))
     print("Local model: {}".format(args.model))
-    print("Using device: {}".format(args.device))
+    print('Using device: {}'.format(args.device))
 
     if args.device == "cuda":
         print("Cuda device id: {}".format(os.environ["CUDA_VISIBLE_DEVICES"]))
