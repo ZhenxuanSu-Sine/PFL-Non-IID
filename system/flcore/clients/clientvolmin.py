@@ -72,6 +72,6 @@ class clientVolMin(Client):
             print(f"Client {self.id}", f"(ε = {res[0]:.2f}, δ = {DELTA}) for α = {res[1]}")
 
     def test_metrics(self):
-        super().test_metrics()
         T = self.trans()
         print(T)
+        return super().test_metrics()
