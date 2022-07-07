@@ -13,7 +13,7 @@ class clientVolMin(Client):
 
         self.lam = args.lambda_t
         self.trans = trans(args.device, args.num_classes)
-        self.loss = nn.CrossEntropyLoss()
+        self.loss = nn.NLLLoss()
         self.optimizer = torch.optim.SGD([{'params': self.model.parameters()},
                                           {'params': self.trans.parameters()}
                                           ], lr=self.learning_rate)
@@ -47,13 +47,13 @@ class clientVolMin(Client):
                     time.sleep(0.1 * np.abs(np.random.rand()))
                 self.optimizer.zero_grad()
                 output = self.model(x)
-
+                clean = torch.softmax(output, dim=1)
                 t = self.trans()
 
-                output = torch.mm(output, t)
+                output = torch.mm(clean, t)
 
                 vol_loss = t.slogdet().logabsdet
-                loss = self.loss(output, y) + self.lam * vol_loss
+                loss = self.loss(torch.log(output), y) + self.lam * vol_loss
                 loss.backward()
                 if self.privacy:
                     dp_step(self.optimizer, i, len(trainloader))
