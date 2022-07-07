@@ -53,8 +53,8 @@ class clientVolMin(Client):
                 output = torch.mm(clean, t)
 
                 vol_loss = t.slogdet().logabsdet
-                print(t)
-                print(vol_loss)
+                # print(t)
+                # print(vol_loss)
                 loss = self.loss(torch.log(output), y) + self.lam * vol_loss
                 loss.backward()
                 if self.privacy:
@@ -70,3 +70,8 @@ class clientVolMin(Client):
         if self.privacy:
             res, DELTA = get_dp_params(self.optimizer)
             print(f"Client {self.id}", f"(ε = {res[0]:.2f}, δ = {DELTA}) for α = {res[1]}")
+
+    def test_metrics(self):
+        super().test_metrics(self)
+        T = self.trans()
+        print(T)
