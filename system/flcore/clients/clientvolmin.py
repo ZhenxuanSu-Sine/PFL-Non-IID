@@ -53,6 +53,8 @@ class clientVolMin(Client):
                 output = torch.mm(clean, t)
 
                 vol_loss = t.slogdet().logabsdet
+                print(t)
+                print(vol_loss)
                 loss = self.loss(torch.log(output), y) + self.lam * vol_loss
                 loss.backward()
                 if self.privacy:
