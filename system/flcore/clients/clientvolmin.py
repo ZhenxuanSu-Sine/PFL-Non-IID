@@ -73,5 +73,6 @@ class clientVolMin(Client):
 
     def test_metrics(self):
         T = self.trans()
+        print(self.lam)
         print(T)
         return super().test_metrics()
