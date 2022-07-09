@@ -94,10 +94,10 @@ class clientVolMin(Client):
 
             output = self.model(x)
 
-            clean = torch.softmax(output, dim=1)
-            t = self.trans()
-
-            output = torch.mm(clean, t)
+            # clean = torch.softmax(output, dim=1)
+            # t = self.trans()
+            #
+            # output = torch.mm(clean, t)
 
             # vol_loss = t.slogdet().logabsdet
             # print(t)
