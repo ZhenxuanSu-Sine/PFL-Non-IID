@@ -142,6 +142,7 @@ class Client(object):
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
+            print(self.loss(output, y))
             loss += self.loss(output, y).item() * y.shape[0]
 
         # self.model.cpu()

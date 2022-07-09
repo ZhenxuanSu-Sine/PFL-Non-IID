@@ -16,7 +16,7 @@ class FedVolMin(Server):
         print("Finished creating server and clients.")
 
         # self.load_model()
-        self.Budget = []
+        self. Budget = []
 
 
     def train(self):
