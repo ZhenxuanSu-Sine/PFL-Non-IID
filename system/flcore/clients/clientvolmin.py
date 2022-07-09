@@ -99,10 +99,10 @@ class clientVolMin(Client):
 
             output = torch.mm(clean, t)
 
-            vol_loss = t.slogdet().logabsdet
+            # vol_loss = t.slogdet().logabsdet
             # print(t)
             # print(vol_loss)
-            batch_loss = self.loss(torch.log(output), y) + self.lam * vol_loss
+            batch_loss = self.loss(torch.log(output), y)
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
