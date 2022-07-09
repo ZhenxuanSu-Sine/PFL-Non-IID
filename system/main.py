@@ -257,7 +257,7 @@ if __name__ == "__main__":
     parser.add_argument('-lambda_t', '--lambda_t', type=float, default=1e-4)
 
     args = parser.parse_args()
-
+    print(args)
     os.environ["CUDA_VISIBLE_DEVICES"] = args.device_id
 
     if args.device == "cuda" and not torch.cuda.is_available():
