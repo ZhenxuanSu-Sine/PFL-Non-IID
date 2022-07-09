@@ -82,6 +82,7 @@ class clientVolMin(Client):
         # self.model = self.load_model('model')
         # self.model.to(self.device)
         self.model.eval()
+        self.trans.eval()
 
         train_num = 0
         loss = 0
