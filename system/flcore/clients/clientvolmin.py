@@ -101,7 +101,7 @@ class clientVolMin(Client):
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
-            print(self.loss(torch.log(output), y))
+            # print(self.loss(torch.log(output), y))
             loss += self.loss(torch.log(output), y).item() * y.shape[0]
 
         # self.model.cpu()
