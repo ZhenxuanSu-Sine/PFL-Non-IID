@@ -82,6 +82,7 @@ class clientVolMin(Client):
         # self.model = self.load_model('model')
         # self.model.to(self.device)
         self.model.eval()
+        self.trans.eval()
 
         train_num = 0
         loss = 0
@@ -92,6 +93,7 @@ class clientVolMin(Client):
                 x = x.to(self.device)
             y = y.to(self.device)
             output = self.model(x)
+            T = self.trans()
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
