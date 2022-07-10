@@ -177,7 +177,6 @@ class Server(object):
         num_samples = []
         losses = []
         for c in self.selected_clients:
-            # print('evaluate train')
             cl, ns = c.train_metrics()
             num_samples.append(ns)
             losses.append(cl*1.0)
