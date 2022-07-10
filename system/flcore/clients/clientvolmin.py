@@ -93,7 +93,6 @@ class clientVolMin(Client):
                 x = x.to(self.device)
             y = y.to(self.device)
             output = self.model(x)
-            T = self.trans()
             output = torch.softmax(output, dim=1)
             t = self.trans()
 
@@ -101,7 +100,8 @@ class clientVolMin(Client):
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
-            # print(self.loss(torch.log(output), y))
+            print(self.loss(torch.log(output), y))
+            print(output[0])
             loss += self.loss(torch.log(output), y).item() * y.shape[0]
 
         # self.model.cpu()
