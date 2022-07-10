@@ -82,7 +82,6 @@ class clientVolMin(Client):
         # self.model = self.load_model('model')
         # self.model.to(self.device)
         self.model.eval()
-        self.trans.eval()
 
         train_num = 0
         loss = 0
@@ -92,23 +91,12 @@ class clientVolMin(Client):
             else:
                 x = x.to(self.device)
             y = y.to(self.device)
-
             output = self.model(x)
-
-            clean = torch.softmax(output, dim=1)
-            t = self.trans()
-
-            output = torch.mm(clean, t)
-            #
-            # vol_loss = t.slogdet().logabsdet
-            # print(t)
-            # print(vol_loss)
-            batch_loss = self.loss(torch.log(output), y)
             # print('------------train------------')
             # self.save_demo(x, output, y)
             train_num += y.shape[0]
-            # print(self.loss(output, y))
-            loss += batch_loss * y.shape[0]
+            print(self.loss(output, y))
+            loss += self.loss(output, y).item() * y.shape[0]
 
         # self.model.cpu()
         # self.save_model(self.model, 'model')
