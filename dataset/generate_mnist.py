@@ -19,6 +19,8 @@ def noisify(data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, 
     print(type(data))
     print(data)
     clean_labels = data[0]['y']
+    print(clean_labels)
+    print(clean_labels.shape)
     noisy_labels, real_noise_rate, transition_matrix = noisify_pairflip(clean_labels,
                                                                               noise=noise_rate,
                                                                               random_state=random_seed,
