@@ -1,5 +1,6 @@
 import numpy as np
-import utils, pdb
+import utils
+
 
 def norm(T):
     row_sum = np.sum(T, 1)
@@ -49,13 +50,13 @@ def dataset_split(train_images, train_labels, noise_rate=0.5, split_per=0.9, ran
 
     if noise_type == 'symmetric':
         noisy_labels, real_noise_rate, transition_matrix = utils.noisify_multiclass_symmetric(clean_train_labels,
-                                                noise=noise_rate, random_state= random_seed, nb_classes=num_classes)
+                                                                                              noise=noise_rate, random_state= random_seed, nb_classes=num_classes)
     elif noise_type == 'flip':
         noisy_labels, real_noise_rate, transition_matrix = utils.noisify_pairflip(clean_train_labels,
-                                                    noise=noise_rate, random_state=random_seed, nb_classes=num_classes)
+                                                                                  noise=noise_rate, random_state=random_seed, nb_classes=num_classes)
     elif noise_type == 'asymmetric':
         noisy_labels, real_noise_rate, transition_matrix = utils.noisify_multiclass_asymmetric(clean_train_labels,
-                                                    noise=noise_rate, random_state=random_seed, nb_classes=num_classes)
+                                                                                               noise=noise_rate, random_state=random_seed, nb_classes=num_classes)
 
     noisy_labels = noisy_labels.squeeze()
 

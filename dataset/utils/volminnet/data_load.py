@@ -2,9 +2,7 @@ import numpy as np
 import torch.utils.data as Data
 from PIL import Image
 from transformer import *
-import tools, pdb
-
-
+import tools
 
 
 class mnist_dataset(Data.Dataset):
@@ -24,7 +22,7 @@ class mnist_dataset(Data.Dataset):
         print(original_images.shape)
 
         self.train_data, self.val_data, self.train_labels, self.val_labels, self.t = tools.dataset_split(original_images,
-                                                                             original_labels, noise_rate, split_per, random_seed, num_class, noise_type)
+                                                                                                         original_labels, noise_rate, split_per, random_seed, num_class, noise_type)
         pass
     def __getitem__(self, index):
            
@@ -99,7 +97,7 @@ class cifar10_dataset(Data.Dataset):
         print(original_images.shape)
 
         self.train_data, self.val_data, self.train_labels, self.val_labels, self.t = tools.dataset_split(original_images,
-                                                                             original_labels, noise_rate, split_per, random_seed, num_class,noise_type)
+                                                                                                         original_labels, noise_rate, split_per, random_seed, num_class, noise_type)
 
 
         if self.anchor:
@@ -185,7 +183,7 @@ class cifar100_dataset(Data.Dataset):
         print(original_images.shape)
 
         self.train_data, self.val_data, self.train_labels, self.val_labels, self.t = tools.dataset_split(original_images,
-                                                                             original_labels, noise_rate, split_per, random_seed, num_class,noise_type)
+                                                                                                         original_labels, noise_rate, split_per, random_seed, num_class, noise_type)
 
 
         if self.anchor:
