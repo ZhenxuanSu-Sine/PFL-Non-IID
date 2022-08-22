@@ -15,6 +15,11 @@ num_classes = 10
 dir_path = "mnist/"
 
 
+def noisify(data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, noise_type='flip'):
+    print(type(data))
+    print(data)
+    return data
+
 # Allocate data to users
 def generate_mnist(dir_path, num_clients, num_classes, niid=False, real=True, partition=None):
     if not os.path.exists(dir_path):
@@ -69,6 +74,7 @@ def generate_mnist(dir_path, num_clients, num_classes, niid=False, real=True, pa
     X, y, statistic = separate_data((dataset_image, dataset_label), num_clients, num_classes, 
                                     niid, real, partition)
     train_data, test_data = split_data(X, y)
+    train_data = noisify(train_data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, noise_type='flip')
     save_file(config_path, train_path, test_path, train_data, test_data, num_clients, num_classes, 
         statistic, niid, real, partition)
 
