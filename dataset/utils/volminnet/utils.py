@@ -110,7 +110,9 @@ def multiclass_noisify(y, P, random_state=1):
     m = y.shape[0]
     new_y = y.copy()
     flipper = np.random.RandomState(random_state)
-
+    print(P)
+    print(P.shape)
+    print(type(P))
     for idx in np.arange(m):
         i = y[idx]
         # draw a vector with only an 1
