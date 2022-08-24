@@ -117,6 +117,7 @@ def multiclass_noisify(y, P, random_state=1):
     print(type(P))
     for idx in np.arange(m):
         i = y[idx]
+        print(i)
         # draw a vector with only an 1
         flipped = flipper.multinomial(1, P[i, :], 1)[0]
         new_y[idx] = np.where(flipped == 1)[0]
