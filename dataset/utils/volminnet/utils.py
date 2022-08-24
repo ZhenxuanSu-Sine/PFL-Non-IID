@@ -111,13 +111,14 @@ def multiclass_noisify(y, P, random_state=1):
     m = y.shape[0]
     new_y = y.copy()
     flipper = np.random.RandomState(random_state)
-    P = torch.Tensor(P)
+    # P = torch.Tensor(P)
     print(P)
     print(P.shape)
     print(type(P))
     for idx in np.arange(m):
         i = y[idx]
-        print(i)
+        i = np.int(i)
+        # print(i)
         # draw a vector with only an 1
         flipped = flipper.multinomial(1, P[i, :], 1)[0]
         new_y[idx] = np.where(flipped == 1)[0]
