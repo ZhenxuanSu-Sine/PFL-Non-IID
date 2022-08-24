@@ -5,6 +5,7 @@ import hashlib
 import errno
 import numpy as np
 from numpy.testing import assert_array_almost_equal
+import torch
 
 def check_integrity(fpath, md5):
     if not os.path.isfile(fpath):
@@ -110,13 +111,14 @@ def multiclass_noisify(y, P, random_state=1):
     m = y.shape[0]
     new_y = y.copy()
     flipper = np.random.RandomState(random_state)
+    P = torch.Tensor(P)
     print(P)
     print(P.shape)
     print(type(P))
     for idx in np.arange(m):
         i = y[idx]
         # draw a vector with only an 1
-        flipped = flipper.multinomial(1, P[i][0], 1)[0]
+        flipped = flipper.multinomial(1, P[i, :][0], 1)[0]
         new_y[idx] = np.where(flipped == 1)[0]
 
     return new_y
