@@ -178,7 +178,6 @@ def save_file(config_path, train_path, test_path, train_data, test_data, real_no
         'real_world': real, 
         'partition': partition,
         'real_noisy_rate': real_noisy_rate,
-        'transition_matrix': transition_matrix,
         'Size of samples for labels in clients': statistic, 
         'alpha': alpha, 
         'batch_size': batch_size, 
@@ -195,5 +194,6 @@ def save_file(config_path, train_path, test_path, train_data, test_data, real_no
             np.savez_compressed(f, data=test_dict)
     with open(config_path, 'w') as f:
         ujson.dump(config, f)
+    np.savetxt(train_path + str(idx) + '_transition', transition_matrix)
 
     print("Finish generating dataset.\n")
