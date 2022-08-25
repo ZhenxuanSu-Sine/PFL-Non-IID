@@ -189,6 +189,7 @@ def save_file(config_path, train_path, test_path, train_data, test_data, real_no
     for idx, train_dict in enumerate(train_data):
         with open(train_path + str(idx) + '.npz', 'wb') as f:
             np.savez_compressed(f, data=train_dict)
+        print('saving transition matrix to %s' % (train_path + str(idx) + '_transition.txt'))
         np.savetxt(train_path + str(idx) + '_transition.txt', transition_matrix)
     for idx, test_dict in enumerate(test_data):
         with open(test_path + str(idx) + '.npz', 'wb') as f:
