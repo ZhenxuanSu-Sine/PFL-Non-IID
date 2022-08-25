@@ -16,17 +16,17 @@ dir_path = "mnist/"
 
 
 def noisify(data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, noise_type='flip'):
-    print(type(data))
-    print(data)
+    # print(type(data))
+    # print(data)
     clean_labels = data[0]['y']
-    print(clean_labels)
-    print(clean_labels.shape)
+    # print(clean_labels)
+    # print(clean_labels.shape)
     noisy_labels, real_noise_rate, transition_matrix = noisify_pairflip(clean_labels,
                                                                               noise=noise_rate,
                                                                               random_state=random_seed,
                                                                               nb_classes=num_classes)
     data[0]['y'] = noisy_labels
-    return data
+    return data, real_noise_rate, transition_matrix
 
 # Allocate data to users
 def generate_mnist(dir_path, num_clients, num_classes, niid=False, real=True, partition=None):
@@ -82,8 +82,8 @@ def generate_mnist(dir_path, num_clients, num_classes, niid=False, real=True, pa
     X, y, statistic = separate_data((dataset_image, dataset_label), num_clients, num_classes, 
                                     niid, real, partition)
     train_data, test_data = split_data(X, y)
-    train_data = noisify(train_data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, noise_type='flip')
-    save_file(config_path, train_path, test_path, train_data, test_data, num_clients, num_classes, 
+    train_data, real_noisy_rate, transition_matrix = noisify(train_data, noise_rate=0.2, split_per=0.9, random_seed=1, num_classes=10, noise_type='flip')
+    save_file(config_path, train_path, test_path, train_data, test_data, real_noisy_rate, transition_matrix, num_clients, num_classes,
         statistic, niid, real, partition)
 
 

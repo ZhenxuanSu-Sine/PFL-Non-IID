@@ -169,14 +169,16 @@ def split_data(X, y):
 
     return train_data, test_data
 
-def save_file(config_path, train_path, test_path, train_data, test_data, num_clients, 
+def save_file(config_path, train_path, test_path, train_data, test_data, real_noisy_rate, transition_matrix, num_clients,
                 num_classes, statistic, niid=False, real=True, partition=None):
     config = {
         'num_clients': num_clients, 
         'num_classes': num_classes, 
         'non_iid': niid, 
         'real_world': real, 
-        'partition': partition, 
+        'partition': partition,
+        'real_noisy_rate': real_noisy_rate,
+        'transition_matrix': transition_matrix,
         'Size of samples for labels in clients': statistic, 
         'alpha': alpha, 
         'batch_size': batch_size, 
